@@ -1,5 +1,7 @@
 package service;
 
+import model.PackedResource;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -33,15 +35,15 @@ public class ClientService {
         return response;
     }
 
-    public HttpResponse<byte[]> getResource(String url) {
+    public HttpResponse<String> getResource(String url) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .build();
 
-        HttpResponse<byte[]> response = null;
+        HttpResponse<String> response = null;
         try {
             response = client.send(request,
-                    HttpResponse.BodyHandlers.ofByteArray());
+                    HttpResponse.BodyHandlers.ofString());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
